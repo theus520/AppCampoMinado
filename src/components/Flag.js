@@ -6,10 +6,10 @@ export default props => {
     return (
 <View style={styles.container} > 
 
-        <View style={styles.flagpole} />
-        <View style={styles.flag} />
-        <View style={styles.base1} />
-        <View style={styles.base2} />
+        <View style={[styles.flagpole, props.bigger ? styles.flagpoleBigger : null]} />
+        <View style={[styles.flag,props.bigger ? styles.flagpoleBigger : null]} />
+        <View style={[styles.base1,props.bigger ? styles.base1Bigger : null]} />
+        <View style={[styles.base2, props.bigger ? styles.base2Bigger : null]} />
 
 </View>
          
@@ -53,6 +53,18 @@ marginLeft: 9,
       backgroundColor: '#222',
       marginLeft: 4,
       marginTop: 12
+  },
+  flagpoleBigger:{
+      height: 28,
+      width: 4,
+      marginLeft: 16,
+
+  },
+  base1Bigger:{
+      height: 4,
+      width: 20,
+      marginLeft: 8,
+      marginTop: 24
   }
 
 
