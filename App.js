@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text,Alert} from 'react-native';
 import params from './src/params'
 import MineField from './src/components/MineField'
-import { createMinedBoard } from './src/logica'
+import { 
+  createMinedBoard,
+  cloneBoard,
+  openField,
+  hadExplosion,
+  wonGame,
+  showMines,
+  inverteFlag
+
+} from './src/logica'
 
 export default class App extends Component {
 
@@ -19,21 +28,50 @@ export default class App extends Component {
     return Math.ceil(cols * rows * params.difficultLevel)
   }
 
-  createState = () => {
+    createState = () => {
     const cols = params.getColumnsAmount()
     const rows = params.getRowsAmount()
     return {
-      board: createMinedBoard(rows, cols, this.minesAmount()),
+        board: createMinedBoard(rows, cols, this.minesAmount()),
+        won: false,
+        lost: false
     }
   }
-  render() {
+onOpenField = (row, column) => {
+const board = cloneBoard(this.state.board)
+openField(board, row,column)
+const lost = hadExplosion(board)
+const won = wonGame(board)
+
+if(lost) {
+  showMines(board)
+  Alert.alert('perdeeeeeeeeeu!', 'que burro!')
+}
+if(won){
+  Alert.alert('parabens', 'você e campeão!')
+}
+this.setState({ board, lost, won})
+}
+
+onSelectField = (row, column ) => {
+  const board = cloneBoard(this.state.board)
+  inverteFlag(board, row, column)
+  const won = wonGame(board)
+  if (won){
+    Alert.alert('parabens ','voce venceu')
+  }
+  this.setState({board, won})
+}
+
+render() {
     return (
-
       <View style style={styles.container}>
-<View style={styles.board}>
+      <View style={styles.board}>
 
-  <MineField board = {this.state.board} />
-  </View>      
+    <MineField board = {this.state.board}
+    onOpenField={this.onOpenField}
+    onSelectField={this.onSelectField} />
+    </View>      
       </View>
     );
   }
