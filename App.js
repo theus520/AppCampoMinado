@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text,Alert} from 'react-native';
 import params from './src/params'
 import MineField from './src/components/MineField'
+import Header from './src/components/Header'
 import { 
   createMinedBoard,
   cloneBoard,
@@ -9,7 +10,8 @@ import {
   hadExplosion,
   wonGame,
   showMines,
-  inverteFlag
+  inverteFlag,
+  bandeiraUsed
 
 } from './src/logica'
 
@@ -62,10 +64,11 @@ onSelectField = (row, column ) => {
   }
   this.setState({board, won})
 }
-
 render() {
     return (
       <View style style={styles.container}>
+        <Header flagsLeft={this.minesAmount()- bandeiraUsed(this.state.board)}
+        onNewGame={() => this.setState(this.createState())} />
       <View style={styles.board}>
 
     <MineField board = {this.state.board}
