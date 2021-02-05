@@ -2,25 +2,27 @@ import React from 'react'
 import {View, StyleSheet,Text, TouchableOpacity} from 'react-native'
 import Flag from './Flag'
 
-export default props =. {
+export default props => {
     return(
-        <View style={styles.container} >
-        <View style={styles.Flagcontainer} >
-         <TouchableOpacity onPress={props.onFlagPress}
-         style={styles.flagButton}>
-         <Flag bigger />
-         </TouchableOpacity>
-        <Text style={styles.flagsLeft}>= {props.flagsLeft}</Text>
-         </View>
-<TouchableOpacity style={styles.button} onPress={onNewGame}>
-   <Text style={styles.buttonLabel}>Novo jogo</Text>
-</TouchableOpacity>
 
+     <View style={styles.container}>
+        <View style={styles.flagContainer}>
+            <TouchableOpacity onPress={props.onFlagPress}
+                style={styles.flagButton}>
+            <Flag bigger />
+            </TouchableOpacity>
+            <Text style={styles.flagsLeft}>= {props.flagsLeft}</Text>
         </View>
+        <TouchableOpacity style={styles.button}
+        onPress={props.onNewGame}>
+       <Text style={styles.buttonLabel}>Novo Jogo </Text>
+        </TouchableOpacity>
+     </View>
+    
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container:{
         flex:1,
         flexDirection: 'row',
@@ -30,7 +32,7 @@ const style = StyleSheet.create({
         paddingTop: 20,
         paddingHorizontal: 20,
     },
-    Flagcontainer:{
+    flagContainer:{
         flexDirection: 'row',
     },
     flagButton:{
@@ -50,7 +52,6 @@ const style = StyleSheet.create({
     buttonLabel:{
         fontSize: 20,
         color: '#DDD',
-        fontWeight: 'bold',
-        backgroundColor: 'acqua '
-    }
+        fontWeight: 'bold'
+    } 
 })
